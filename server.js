@@ -131,6 +131,15 @@ io.on("connection", (socket) => {
         }
     });
 
+    socket.on('get_user_all', async () => {
+        try {
+            const allUserData = await User.find();;
+            io.emit('send_user_all', allUserData);
+        } catch (error) {
+            console.error('Xatolik yuzaga keldi:', error.message);
+        }
+    });
+
 })
 
 server.listen(PORT, () => {
